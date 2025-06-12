@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "ms-dotnettools.csharp",           // C# and .NET support
+    "ms-azuretools.vscode-docker",     // Docker support
+    "esbenp.prettier-vscode",          // Code formatter
+    "eamodio.gitlens",                 // Git enhancements
+    "dbaeumer.vscode-eslint",          // JS/TS linting (if using React frontend)
+    "formulahendry.dotnet-test-explorer" // .NET test explorer
+  ]
+}

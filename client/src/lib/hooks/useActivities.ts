@@ -13,7 +13,7 @@ export const useActivities = (id?: string) => {
         }
     });
 
-    const { data: activity, isLoading } = useQuery({
+    const { data: activity, isLoading: isLoadingActivity } = useQuery({
         queryKey: ['activities', id],
         queryFn: async () => {
             const response = await agent.get<Activity>(`/activities/${id}`);            
@@ -63,6 +63,6 @@ export const useActivities = (id?: string) => {
         createActivity,
         deleteActivity,
         activity,
-        isLoading
+        isLoadingActivity
     }
 }

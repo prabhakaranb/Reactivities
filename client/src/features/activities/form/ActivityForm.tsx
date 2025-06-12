@@ -7,7 +7,7 @@ import { useActivities } from "../../../lib/hooks/useActivities";
 export default function ActivityForm() {
     const navigate = useNavigate();
     const { id } = useParams();
-    const { updateActivity, createActivity, activity, isLoading } = useActivities(id);
+    const { updateActivity, createActivity, activity, isLoadingActivity } = useActivities(id);
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -31,7 +31,7 @@ export default function ActivityForm() {
         }
     };
 
-    if (isLoading) return <Typography>Loading...</Typography>;
+    if (isLoadingActivity) return <Typography>Loading...</Typography>;
 
     return (
         <Paper sx={{ borderRadius: 3, padding: 3 }}>
