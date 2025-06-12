@@ -9,15 +9,18 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './app/layout/styles.css'
 import { router } from './app/router/Routes.tsx'
+import { store, StoreContext } from './lib/stores/store.ts';
 
 
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <StoreContext.Provider value={store}>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools />
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </StoreContext.Provider>
   </StrictMode>
 )
