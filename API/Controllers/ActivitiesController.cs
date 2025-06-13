@@ -1,5 +1,6 @@
-using Application.Activities.Queries;
 using Application.Activities.Commands;
+using Application.Activities.DTOs;
+using Application.Activities.Queries;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,52 +12,29 @@ public class ActivitiesController : BaseApiController
     public async Task<ActionResult<List<Activity>>> GetActivities()
     {
         return await Mediator.Send(new GetActivityList.Query());
-        // return await context.Activities.ToListAsync();
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Activity>> GetActivity(string id)
+    public async Task<ActionResult<Activity>> GetActivityDetail(string id)
     {
-        return await Mediator.Send(new GetActivityDetails.Query { Id = id });
-        // var activity = await context.Activities.FindAsync(id);
-        // if (activity == null) return NotFound();
-        // return activity;
+        return HandleResult(await Mediator.Send(new GetActivityDetails.Query { Id = id }));
     }
 
     [HttpPost]
-    public async Task<ActionResult<string>> CreateActivity(Activity activity)
+    public async Task<ActionResult<string>> CreateActivity(CreateActivityDto activityDto)
     {
-        return await Mediator.Send(new CreateActivity.Command { Activity = activity });
-        // context.Activities.Add(activity);
-        // await context.SaveChangesAsync();
-        // return activity.Id;
+        return HandleResult(await Mediator.Send(new CreateActivity.Command { ActivityDto = activityDto }));
     }
 
     [HttpPut]
-    public async Task<IActionResult> EditActivity(Activity activity)
+    public async Task<ActionResult> EditActivity(Activity activity)
     {
-        await Mediator.Send(new EditActivity.Command { Activity = activity });
-
-        return NoContent();
-        // var existingActivity = await context.Activities.FindAsync(activity.Id);
-        // if (existingActivity == null) return NotFound();
-        // existingActivity.Title = activity.Title;
-        // existingActivity.Description = activity.Description;
-        // existingActivity.Date = activity.Date;
-        // existingActivity.Category = activity.Category;
-        // existingActivity.City = activity.City;
-        // existingActivity.Venue = activity.Venue;
-        // await context.SaveChangesAsync();
+        return HandleResult(await Mediator.Send(new EditActivity.Command { Activity = activity }));
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteActivity(string id)
+    public async Task<ActionResult> DeleteActivity(string id)
     {
-        await Mediator.Send(new DeleteActivity.Command { Id = id });
-        return Ok();
-        // var activity = await context.Activities.FindAsync(id);
-        // if (activity == null) return NotFound();
-        // context.Activities.Remove(activity);
-        // await context.SaveChangesAsync();
-    }   
+        return HandleResult(await Mediator.Send(new DeleteActivity.Command { Id = id }));
+    }
 }

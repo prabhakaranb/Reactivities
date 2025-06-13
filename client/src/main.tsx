@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router'
+import { ToastContainer } from 'react-toastify';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import '@fontsource/roboto/300.css';
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')!).render(
     <StoreContext.Provider value={store}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
+        <ToastContainer position='bottom-right' hideProgressBar theme='colored' />
         <RouterProvider router={router} />
       </QueryClientProvider>
     </StoreContext.Provider>
